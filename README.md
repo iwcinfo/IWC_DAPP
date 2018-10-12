@@ -1,3 +1,4 @@
 # IWC_DEV
+https://github.com/Microsoft/cpprestsdk/wiki/How-to-build-for-Mac-OS-X
 
-일단 각자 브랜치해서 작업 시작 궈궈
+https://github.com/Microsoft/cpprestsdk
