@@ -4,5 +4,5 @@
 ## heading
 Architecture
 
-
-/Users/gyuraekim/Desktop/test.jpg
+#![](image/test.jpg)
+#/Users/gyuraekim/Desktop/test.jpg
