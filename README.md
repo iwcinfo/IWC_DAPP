@@ -1,7 +1,5 @@
 # IWC_DEV
 
-# IWC_DEV
-
 
 ## Architecture
 IWC POC레벨 Dapp은 총 4개의 상위 모듈로 구성된다.
