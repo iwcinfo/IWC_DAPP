@@ -76,7 +76,7 @@ std::string GenerateURL::getHashValue() {
   }
   return hash;
 }
-// "Accept and handle parameter for URL"
+// "Accept and handle parameter for URL init#2 github test"
 std::string GenerateURL::getURL() {
   url = url + "endDate=" + getCurrentDate() + "%20" + getCurrentTime() + "&operatorID=ibct_iwc&startDate=" +
   date + "%20" + time  +"&time=" + std::to_string(getEpoch()) + "&transType=1&vendorID=0&hash=" + getHashValue();
