@@ -19,8 +19,8 @@ public:
   std::string getCurrentDate();
   std::string getCurrentTime() ;
   std::string appendParameters(std::string private_key);
-  std::string getHashValue();
-  std::string getURL();
+  std::string getHashValue(std::string pkey, std::string parameters);
+  std::string getURL(std::string url_base, std::map<std::string, std::string> paramater_map);
 private:
 };
 
@@ -60,11 +60,10 @@ std::string GenerateURL::appendParameters(std::string private_key) { // 여기 �
   return str;
 }
 
-
-std::string GenerateURL::getHashValue() {
+std::string GenerateURL::getHashValue(std::string pkey, std::string parameters) {
   std::string hash = "";
-  char buffer [80];
-  std::string params = appendParameters(pkey);
+  char buffer [99];
+  std::string params = pkey + parameters;
   unsigned char digest[params.length()];
   const char* string = params.c_str();
   CC_MD5(string, (CC_LONG)strlen(string), digest);
@@ -76,15 +75,33 @@ std::string GenerateURL::getHashValue() {
   }
   return hash;
 }
-// "Accept and handle parameter for URL init#2 github test"
-std::string GenerateURL::getURL() {
-  url = url + "endDate=" + getCurrentDate() + "%20" + getCurrentTime() + "&operatorID=ibct_iwc&startDate=" +
-  date + "%20" + time  +"&time=" + std::to_string(getEpoch()) + "&transType=1&vendorID=0&hash=" + getHashValue();
+
+// Accept and handle parameter for URL
+std::string GenerateURL::getURL(std::string url_base, std::map<std::string, std::string> paramater_map) {
+  std::string url = url_base + "?";
+  std::string url_parameters = "";
+  for (auto it = paramater_map.begin(); it != paramater_map.end(); ){
+    std::string parameter_name = it->first;
+    std::string parameter_value = it->second;
+    url_parameters += parameter_name + "=" + parameter_value;
+    ++it;
+
+    if (it == paramater_map.end()) {
+      url += url_parameters + "&hash=" + getHashValue(pkey, url_parameters);
+    } else {
+      url_parameters += "&";
+    }
+  }
+
   return url;
 }
 
-/*int main() {
+int main() {
   GenerateURL a = * new GenerateURL();
-  cout << a.getURL() << endl;
+  std::map<std::string, std::string> parameters;
+  parameters.insert(make_pair("endDate", a.getCurrentDate() + "%20" + a.getCurrentTime()));
+  parameters.insert(make_pair("operatorID", "ibct_iwc"));
+  std::string url = a.getURL("http://iwc.io/apiTest", parameters);
+  cout << url << endl;
   return 0;
-}*/
+}
