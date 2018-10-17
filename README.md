@@ -2,20 +2,12 @@
 
 
 ## Architecture
-IWC POC레벨 Dapp은 총 5개의 상위 모듈로 구성된다.
+IWC POC레벨 Dapp은 총 4개의 상위 모듈로 구성된다.
 
-0. standby
 1. append
 2. api_call
 3. push_data
 4. ui/ux
-
-```
-0. standby
-standby 모듈은 일정 기간마다(현재는 10초) 1-4번 모듈을 구동시킨다.
-1-4번의 submodule로 구성된 top_module.cpp를 10초에 한번씩 실행 시킨다.
-풀노드 서버에서 실행되며 10초마다 데이터를 긁어와 블록체인, db에 업로드하고 UI에 뿌려주게 된다.
-```
 
 ```
 1. append
