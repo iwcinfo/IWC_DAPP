@@ -1,4 +1,5 @@
 # IWC_DEV
+#github test
 
 
 ## Architecture
@@ -27,7 +28,7 @@ api call을 한다. api 데이터를 json형식의 스트링으로 받는다.
 ```
 3. push_data
 push_data 모듈은 c++로 작성된다.
-api_call class가 생성한 json형식의 스트링을 
+api_call class가 생성한 json형식의 스트링을
 uploadToBlockchain함수는 push_trx.sh파일을 이용하여 ibct private net으로 push한다.
 push_trx.sh 파일은 트렌젝션을 푸시하고 나오는 리턴값 중 트렌젝션 넘버 / 헤쉬를 다시 api_call class로 전달한다.
 mergeData함수는 api_call class에서 아웃풋된 json스트링 값과 getTransactionNum함수와 getHash함수를 이용하여 전달받은
