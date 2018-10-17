@@ -54,12 +54,12 @@ std::string GenerateURL::getCurrentTime(){
   return buf2;
 }
 
-std::string GenerateURL::appendParameters(std::string private_key) { // 여기 어레이가 들어가야 할 듯!
-  string str = private_key + "endDate=" + getCurrentDate() + " " + getCurrentTime() + "&operatorID=ibct_iwc&startDate=" +
-  date + " " + time  +"&time=" + std::to_string(getEpoch()) + "&transType=1&vendorID=0";
-  return str;
-}
+// DEPRECATED
+std::string GenerateURL::appendParameters(std::string private_key)
+//  string str = private_key + "endDate=" + getCurrentDate() + " " + getCurrentTime() + "&operatorID=ibct_iwc&startDate=" +  date + " " + time  +"&time=" + std::to_string(getEpoch()) + "&transType=1&vendorID=0";
+//  example Code
 
+// Use pkey and parameters to generate tail part of URL
 std::string GenerateURL::getHashValue(std::string pkey, std::string parameters) {
   std::string hash = "";
   char buffer [99];
@@ -99,6 +99,7 @@ std::string GenerateURL::getURL(std::string url_base, std::map<std::string, std:
 int main() {
   GenerateURL a = * new GenerateURL();
   std::map<std::string, std::string> parameters;
+  // ADD PARAMETERS BY INSERT
   parameters.insert(make_pair("endDate", a.getCurrentDate() + "%20" + a.getCurrentTime()));
   parameters.insert(make_pair("operatorID", "ibct_iwc"));
   std::string url = a.getURL("http://iwc.io/apiTest", parameters);
