@@ -4,8 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <map>
-#include "md5.h"
-#include <CommonCrypto/CommonDigest.h>
+#include <openssl/md5.h>
 
 using namespace std;
 
@@ -55,25 +54,26 @@ std::string GenerateURL::getCurrentTime(){
 }
 
 // DEPRECATED
-std::string GenerateURL::appendParameters(std::string private_key)
+//std::string GenerateURL::appendParameters(std::string private_key)
 //  string str = private_key + "endDate=" + getCurrentDate() + " " + getCurrentTime() + "&operatorID=ibct_iwc&startDate=" +  date + " " + time  +"&time=" + std::to_string(getEpoch()) + "&transType=1&vendorID=0";
 //  example Code
 
 // Use pkey and parameters to generate tail part of URL
 std::string GenerateURL::getHashValue(std::string pkey, std::string parameters) {
-  std::string hash = "";
-  char buffer [99];
   std::string params = pkey + parameters;
+
   unsigned char digest[params.length()];
   const char* string = params.c_str();
-  CC_MD5(string, (CC_LONG)strlen(string), digest);
-  for (size_t i=0; i<CC_MD5_DIGEST_LENGTH; ++i) {
-      //printf("%.2x", digest[i]);
-      snprintf(buffer, sizeof(buffer), "%.2x", digest[i]);
-      std::string hash_temp (buffer);
-      hash = hash + hash_temp;
-  }
-  return hash;
+
+  MD5((unsigned char*)&string, strlen(string), (unsigned char*)&digest);
+
+  char mdString[33];
+
+  for(int i = 0; i < 16; i++)
+       sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+  //printf("md5 digest: %s\n", mdString);
+  return mdString;
 }
 
 // Accept and handle parameter for URL
@@ -97,6 +97,7 @@ std::string GenerateURL::getURL(std::string url_base, std::map<std::string, std:
 }
 
 int main() {
+
   GenerateURL a = * new GenerateURL();
   std::map<std::string, std::string> parameters;
   // ADD PARAMETERS BY INSERT
@@ -105,4 +106,5 @@ int main() {
   std::string url = a.getURL("http://iwc.io/apiTest", parameters);
   cout << url << endl;
   return 0;
+
 }
