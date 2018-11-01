@@ -1,4 +1,5 @@
 # IWC_DEV
+#github test
 
 ## Background
 IWC가 제공하는 플랫폼에서 구동되는 게임들은 모두 Bet&Win 데이터를 생성해내고 이러한 데이터는 IWC의 API Wallet의 searchTransactions API를 이용하여 추출할 수 있다.
@@ -15,7 +16,7 @@ IWC는 게임 데이터를 블록체인화 하기 위해 아래와 같은 로직
 
 세 번째 parseJSON 모듈은 API URL에서 받아온 Raw Data를 다음 모듈에 적합한 형태로 바꿔주며 동시에 받아온 데이터의 무결성을 검증한다. 이 모듈에서 나온 반환 값은 두 개의 다른 모듈로 전해지게 된다.
 
-다음에 오는 두 모듈은 addToDB와 addToBlockchain 모듈로 모든 전 처리를 거친 데이터를 로컬 DB와 EOS CHROME 블록체인에 업로드 하는 역할을 한다. 같은 데이터를 신뢰성 높은 두 가지 매체에 저장함으로서 데이터에 대한 신뢰성을 더 늘릴 수 있다.
+다음에 오는 두 모듈은 addToDB와 addToBlockchain 모듈로 모든 전 처리를 거친 데이터를 로컬 DB와 EOS CHROME 블록체인에 업로드 하는 역할을 한다. 같은 데이터를 신뢰성 높은 두 가지 매체에 저장함으로서 데이터에대한 신뢰성을 더 늘릴 수 있다.
 
 최종 단말에서는 블록체인에 업로드되어 검열 저항성과 불변성이 보장된 Bet&Win 데이터를 손쉽게 검색하여 찾아 볼 수 있는 UI/UX를 제공한다.
 
@@ -41,12 +42,10 @@ cpp파일 안에는 URL생성에 필요한 여러 파라미터가 하드코딩�
 유저 인풋을 받아 구동한다.
 내부적으로 스트링을 합치는 함수, 해쉬하는 함수, URL생성 함수등이 연동된다.
 
-
 ### 2. call_api
 call_api 모듈은 c++과 shell script 언어로 작성된다.
 call_api class는 append class에서 아웃풋된 api URL을 이용하여
 api call을 한다. api 데이터를 cURL하여 json 파일로 저장하여 3번째 모듈로 넘겨준다.
-
 
 ### 3. parse_json
 parse_json 모듈은 c++ 및 Python으로 작성된다.

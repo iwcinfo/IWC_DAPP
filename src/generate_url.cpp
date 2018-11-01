@@ -10,7 +10,6 @@
 #include <iomanip>
 #include <sstream>
 
-
 using namespace std;
 
 class GenerateURL{
@@ -98,8 +97,3 @@ std::string GenerateURL::getStartDate() {
   ss << std::put_time(std::localtime(&epoch_one_second_later), "%Y-%m-%d");
   return ss.str();
 }
-
-/*int main() {
-  GenerateURL a;
-    return 0;
-    }*/
