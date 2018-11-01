@@ -3,10 +3,7 @@
 #include "define.h"
 #include <iostream>
 #include <cstdlib>
-//#include <map>
-//#include "md5hash.h"
 #include <chrono>
-//#include <ctime>
 #include <iomanip>
 #include <sstream>
 
@@ -14,8 +11,6 @@ using namespace std;
 
 class GenerateURL{
 public:
-  //std::string date = START_DATE;
-  //  std::string time = START_TIME;
   std::string url = API_URL;
   std::string pkey = PRIVATE_KEY;
   std::string oper = OPERATOR;
@@ -71,7 +66,7 @@ std::string GenerateURL::getCurrentTime(){
   return current_time_;
 }
 
-std::string GenerateURL::appendParameters(std::string private_key) { // 여기 어레이가 들어가야 할 듯!
+std::string GenerateURL::appendParameters(std::string private_key) {
   std:: string str = private_key + "endDate=" + current_date + " " + current_time + "&operatorID=" + oper + "&pageSize=2500&startDate=" + start_date + " " + start_time  +"&time=" + std::to_string(epoch) + "&transType=1&vendorID=0";
   return str;
 }
