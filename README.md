@@ -1,5 +1,4 @@
 # IWC_DEV
-#github test
 
 ## Background
 IWC가 제공하는 플랫폼에서 구동되는 게임들은 모두 Bet&Win 데이터를 생성해내고 이러한 데이터는 IWC의 API Wallet의 searchTransactions API를 이용하여 추출할 수 있다.
