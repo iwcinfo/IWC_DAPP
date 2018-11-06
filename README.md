@@ -61,3 +61,31 @@ DB에 저장된 정보를 받아서 디스플레이.
 ## Data Handling
 ./log/archive_parsed.txt와 ./log/api_archive.json 파일에는 searchTransaction api call의 결과값을 모두 저장한다.
 ./log/average_upload_time.txt에는 모든 전처리가 끝난 트렌젝션 값 하나를 DB와 EOS CHROME 블록체인에 업로드하는데 드는 평균 시간을 ms 단위로 기록한다.
+
+## Source Paths
+```
+├─ README.md
+├─ image                         
+│  ├─ IWC_EOSCHROME.png
+├─ lib                              
+├─ program
+│  ├─ run.sh
+│  ├─ walletpassword.txt
+├─ src
+│  ├─ contracts
+│  │  ├─ contracts.abi
+│  │  ├─ contracts.cpp
+│  │  ├─ contracts.hpp
+│  │  ├─ contracts.wasm
+│  │  ├─ contracts.wast
+│  ├─ add_to_db.cpp
+│  ├─ api.sh
+│  ├─ call_api.cpp
+│  ├─ define.h
+│  ├─ generate_url.cpp
+│  ├─ main.cpp
+│  ├─ md5hash.cpp
+│  ├─ md5hash.h
+│  ├─ parse.py
+│  ├─ parse_json.cpp
+```
