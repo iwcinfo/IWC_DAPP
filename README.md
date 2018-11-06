@@ -61,12 +61,3 @@ DB에 저장된 정보를 받아서 디스플레이.
 ## Data Handling
 ./log/archive_parsed.txt와 ./log/api_archive.json 파일에는 searchTransaction api call의 결과값을 모두 저장한다.
 ./log/average_upload_time.txt에는 모든 전처리가 끝난 트렌젝션 값 하나를 DB와 EOS CHROME 블록체인에 업로드하는데 드는 평균 시간을 ms 단위로 기록한다.
-
-## BUILD
-```
-cd program
-g++ --std=c++11 /home/eos/contracts/IWC_DEV/src/main.cpp -o /home/eos/contracts/IWC_DEV/program/program -I/usr/include/mysql -I/usr/include/mysql/mysql -L/usr/lib64/mysql -lmysqlclient -lpthread -lm -ldl
-export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH
-chmod +x ./run.sh
-./run.sh
-```
