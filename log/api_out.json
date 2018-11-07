@@ -1,0 +1,18 @@
+{
+  "returnCode": 0,
+  "description": "Success",
+  "totalDataSize": 1,
+  "totalPageSize": 1,
+  "currentPage": 1,
+  "transactions": [
+    {
+      "transType": "WIN",
+      "userID": "chmin77",
+      "transID": "1574672178-68f07b",
+      "transTime": "2018-11-07 17:26:34",
+      "transContent": null,
+      "amount": 60,
+      "thirdParty": "GAMEART"
+    }
+  ]
+}

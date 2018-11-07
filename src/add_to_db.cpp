@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <cstring>
-#include <chrono> //testing purpose
+
 struct connection_details {
 
   const char *server;
@@ -58,7 +58,6 @@ void tokenize(std::string const &str, const char delim,
 }
 
 std::string refactorTime(std::string str) {
-  //std::string str = "2018-01-01 00:00:00";
   std::size_t index = str.find("-");
   while(index != std::string::npos) {
     str.erase(index, 1);
@@ -96,11 +95,7 @@ bool addToDB () {
   res4 = mysql_perform_query(conn, "use iwc_data");
   mysql_free_result(res4);
   //if api call is successful
-  std::ofstream out_average; 
-  out_average.open("/home/eos/contracts/IWC_DEV/log/average_upload_time.txt", ios::app); // TODO: TEST OUTPUT GOES HERE!
   if (content.find("Success") != std::string::npos) {
-    //remove string "success"
-    auto start = std::chrono::high_resolution_clock::now();
     std::string success = "Success";
     size_t pos = content.find(success);
     content.erase(pos, success.length());
@@ -114,32 +109,22 @@ bool addToDB () {
       char delim = ',';
       std::vector <std::string> transaction;
       tokenize(out[i], delim, transaction);
-      if ((transaction[6]).compare("PLAYSTAR") == 0 || (transaction[6]).compare("MOCA_GAME") == 0) {
-	std::cout << "Success!" << endl;
-	std::string insert_command =  "INSERT INTO `win_bet` (`transType`,`userID`,`transID`,`transTime`,`transContent`,`amount`,`thirdParty`) VALUES (\"" + transaction[0] + "\", \"" + transaction[1] + "\", \"" + transaction[2] + "\", \"" + transaction[3] + "\", \"" + transaction[4] + "\", \"" + transaction[5] + "\", \"" + transaction[6] + "\")";
+      if ((transaction[1]).compare("PLAYSTAR") == 0 || (transaction[1]).compare("MOCA_GAME") == 0) {
+	std::string insert_command =  "INSERT INTO `win_bet` (`transType`,`userID`,`transID`,`transTime`,`transContent`,`amount`,`thirdParty`) VALUES (\"" + transaction[4] + "\", \"" + transaction[2] + "\", \"" + transaction[5] + "\", \"" + transaction[0] + "\", \"" + transaction[6] + "\", \"" + transaction[3] + "\", \"" + transaction[1] + "\")";
 	char *command = new char[insert_command.length() + 1];
 	res_insert = mysql_perform_query(conn, std::strcpy(command, insert_command.c_str()));
 	mysql_free_result(res_insert);
-	std::string push_action = "cleos push action chromemoney1 update '[chromemoney1 " + transaction[0] + " " + transaction[1] + " " + transaction[2] + " " + refactorTime(transaction[3]) + " " + transaction[4] + " " + transaction[5] + " " + transaction[6] + "]' -p chromemoney1@active";
-	cout << push_action << endl;
+	std::string push_action = "cleos push action iwceoschrome update '[iwceoschrome " + transaction[4] + " " + transaction[2] + " " + transaction[5] + " " + refactorTime(transaction[0]) + " " + transaction[6] + " " + transaction[3] + " " + transaction[1] + "]' -p iwceoschrome@active >> /home/eos/contracts/IWC_DEV/log/stdout.txt 2>&1";
 	system(push_action.c_str());
       }
     }
-    auto finish = std::chrono::high_resolution_clock::now();
-    std::cout << "********Time Passed to upload " <<out.size()<< " items: " << chrono::duration_cast<chrono::milliseconds>(finish - start).count() << "ms  ********"<< std::endl;
-    double avg = chrono::duration_cast<chrono::milliseconds>(finish - start).count()/ (double)out.size();
-    std::cout << "***AVERAGE = " << avg << "ms*************" << std::endl;
-    out_average << avg << endl;
   }
   else if (content.find("fail") != std::string::npos) {
     //if fail, don't increment time
-    std::cout << "FAIL!" << std::endl;
   }
   else if (content.find("empty") != std::string::npos) {
     //if empty don't do anything
-    std::cout << "EMPTY!" << std::endl;
   }
-  out_average.close();
   std::string show_content = "select *from win_bet";
   res = mysql_perform_query(conn, "select *from win_bet");
   mysql_free_result(res);

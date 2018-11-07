@@ -24,7 +24,6 @@ void msleep(unsigned long milisec)
 
 
 int main(int argc, char* argv[]) {
-  cout << "start time: "<< argv[1] << "   " << argv[2] << endl;
   std:string pkey = PRIVATE_KEY; // private key from define.h
   GenerateURL url_inst = GenerateURL(argv[1], argv[2]); // url inst, constructor
   std::ofstream start_date ("/home/eos/contracts/IWC_DEV/log/start_date.txt");
@@ -33,12 +32,10 @@ int main(int argc, char* argv[]) {
   MD5 hash_inst = MD5(url_inst.appendParameters(pkey)); // get hash
   std::string hash = hash_inst.hexdigest(); // get hash
   url = url + hash; // url + hash
-  std::cout << url << std::endl;
   std::ofstream out ("/home/eos/contracts/IWC_DEV/log/output.txt");
   out << url << std::endl << std::endl;
   start_date << url_inst.getStartDate();
   start_time << url_inst.getStartTime();
-  cout << "end   time: "<< url_inst.current_date << "   " << url_inst.current_time << endl << endl;
   out.close();
   start_date.close();
   start_time.close();

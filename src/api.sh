@@ -6,6 +6,6 @@ rm -rf $DIR/log/api_out.json
 curl -s $url |\
   jq '.' > $DIR/log/api_out.json
 
-echo "$url" >> $DIR/log/api_archive.json
+#echo "$url" >> $DIR/log/api_archive.json
 curl -s $url |\
   jq '.' >> $DIR/log/api_archive.json
