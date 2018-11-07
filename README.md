@@ -88,4 +88,15 @@ DB에 저장된 정보를 받아서 디스플레이.
 │  ├─ md5hash.h
 │  ├─ parse.py
 │  ├─ parse_json.cpp
+├─ log
+│  ├─ api_archive.json
+│  ├─ average_upload_time.txt
+│  ├─ start_date.txt
+│  ├─ start_time.txt
+│  ├─ stdout.txt
+│  ├─ parsed_json.txt
+│  ├─ output.txt
+│  ├─ average_upload_time.txt
+│  ├─ api_out.json
+│  ├─ archive_parsed.txt
 ```
