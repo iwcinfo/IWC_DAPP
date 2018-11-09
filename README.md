@@ -100,5 +100,4 @@ DB에 저장된 정보를 받아서 디스플레이.
 │  ├─ average_upload_time.txt
 │  ├─ api_out.json
 │  ├─ archive_parsed.txt
-│
 ```
